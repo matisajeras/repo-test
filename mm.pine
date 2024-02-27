@@ -1,0 +1,13 @@
+strategy("Estrategia de media moviles", overlay = true)
+
+sma50 = ta.sma(close,50)
+sma200 = ta.sma(close,200)
+
+buy_cond = ta.crossover(sma50,sma200) 
+sell_cond = ta.crossunder(sma200,sma50) 
+
+strategy.entry("Buy", strategy.long, when=buy_cond)
+strategy.entry("Sell", strategy.short, when=buy_cond)
+
+plot(sma50, color = color.blue, title="SMA50")
+plot(sma200, color = color.white, title="SMA200")
